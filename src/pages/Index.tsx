@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
@@ -52,6 +53,15 @@ const Index = () => {
     { name: "Щука", weight: "до 15 кг", difficulty: "Средне", color: "bg-yellow-100 text-yellow-800" },
     { name: "Сом", weight: "до 50 кг", difficulty: "Сложно", color: "bg-red-100 text-red-800" },
     { name: "Карп", weight: "до 20 кг", difficulty: "Средне", color: "bg-blue-100 text-blue-800" },
+  ];
+
+  const topPlayers = [
+    { rank: 1, name: "Рыболов-Мастер", trophy: "Сом 48.5 кг", location: "Волга", date: "15 ноя 2024", medal: "🥇" },
+    { rank: 2, name: "Профи Удочки", trophy: "Щука 14.2 кг", location: "Ладожское озеро", date: "12 ноя 2024", medal: "🥈" },
+    { rank: 3, name: "Король Заброса", trophy: "Карп 19.8 кг", location: "Дон", date: "10 ноя 2024", medal: "🥉" },
+    { rank: 4, name: "Тихий Охотник", trophy: "Щука 13.5 кг", location: "Селигер", date: "08 ноя 2024", medal: "" },
+    { rank: 5, name: "Речной Волк", trophy: "Судак 8.9 кг", location: "Волга", date: "06 ноя 2024", medal: "" },
+    { rank: 6, name: "Мастер Спиннинга", trophy: "Окунь 1.9 кг", location: "Байкал", date: "05 ноя 2024", medal: "" },
   ];
 
   return (
@@ -219,6 +229,100 @@ const Index = () => {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-b from-muted/50 to-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 text-lg py-2 px-4" variant="secondary">
+              <Icon name="TrendingUp" className="mr-2" size={18} />
+              Лидеры
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Рейтинг игроков</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Лучшие рыболовы и их трофейные уловы
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <Card className="border-2 shadow-xl overflow-hidden">
+              <CardHeader className="bg-primary/5">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Icon name="Trophy" className="text-primary" size={28} />
+                  </div>
+                  <div>
+                    <CardTitle className="text-2xl">Топ рыболовов недели</CardTitle>
+                    <CardDescription className="text-base">
+                      Самые впечатляющие трофеи последних дней
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="p-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="hover:bg-transparent border-b-2">
+                      <TableHead className="w-16 text-center font-bold">Место</TableHead>
+                      <TableHead className="font-bold">Игрок</TableHead>
+                      <TableHead className="font-bold">Трофей</TableHead>
+                      <TableHead className="font-bold hidden md:table-cell">Локация</TableHead>
+                      <TableHead className="font-bold hidden sm:table-cell">Дата</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {topPlayers.map((player) => (
+                      <TableRow 
+                        key={player.rank} 
+                        className={`hover:bg-muted/50 transition-colors ${player.rank <= 3 ? 'bg-accent/5' : ''}`}
+                      >
+                        <TableCell className="text-center font-bold">
+                          <div className="flex items-center justify-center gap-2">
+                            {player.medal ? (
+                              <span className="text-2xl">{player.medal}</span>
+                            ) : (
+                              <span className="text-muted-foreground">{player.rank}</span>
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                              <Icon name="User" className="text-primary" size={16} />
+                            </div>
+                            <span className="font-semibold">{player.name}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Icon name="Fish" className="text-secondary" size={18} />
+                            <span className="font-medium text-secondary">{player.trophy}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <Icon name="MapPin" size={14} />
+                            {player.location}
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden sm:table-cell text-muted-foreground text-sm">
+                          {player.date}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+
+            <div className="mt-8 text-center">
+              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform">
+                <Icon name="List" className="mr-2" size={20} />
+                Посмотреть полный рейтинг
+              </Button>
+            </div>
           </div>
         </div>
       </section>
