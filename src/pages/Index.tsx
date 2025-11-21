@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Progress } from "@/components/ui/progress";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
@@ -62,6 +63,73 @@ const Index = () => {
     { rank: 4, name: "Тихий Охотник", trophy: "Щука 13.5 кг", location: "Селигер", date: "08 ноя 2024", medal: "" },
     { rank: 5, name: "Речной Волк", trophy: "Судак 8.9 кг", location: "Волга", date: "06 ноя 2024", medal: "" },
     { rank: 6, name: "Мастер Спиннинга", trophy: "Окунь 1.9 кг", location: "Байкал", date: "05 ноя 2024", medal: "" },
+  ];
+
+  const achievements = [
+    { 
+      icon: "Fish", 
+      title: "Первый улов", 
+      description: "Поймай свою первую рыбу", 
+      progress: 100,
+      unlocked: true,
+      color: "bg-green-500"
+    },
+    { 
+      icon: "Target", 
+      title: "Меткий стрелок", 
+      description: "10 точных забросов подряд", 
+      progress: 70,
+      unlocked: false,
+      color: "bg-blue-500"
+    },
+    { 
+      icon: "Trophy", 
+      title: "Трофейный охотник", 
+      description: "Поймай рыбу весом более 20 кг", 
+      progress: 45,
+      unlocked: false,
+      color: "bg-yellow-500"
+    },
+    { 
+      icon: "Crown", 
+      title: "Король водоёма", 
+      description: "Стань первым в рейтинге", 
+      progress: 0,
+      unlocked: false,
+      color: "bg-purple-500"
+    },
+    { 
+      icon: "Zap", 
+      title: "Молниеносная реакция", 
+      description: "Сделай подсечку менее чем за 0.5 сек", 
+      progress: 100,
+      unlocked: true,
+      color: "bg-orange-500"
+    },
+    { 
+      icon: "MapPin", 
+      title: "Исследователь", 
+      description: "Посети все 20 локаций", 
+      progress: 30,
+      unlocked: false,
+      color: "bg-teal-500"
+    },
+    { 
+      icon: "Star", 
+      title: "Коллекционер", 
+      description: "Поймай все виды рыб", 
+      progress: 58,
+      unlocked: false,
+      color: "bg-pink-500"
+    },
+    { 
+      icon: "Users", 
+      title: "Социальный рыболов", 
+      description: "Участвуй в 5 турнирах", 
+      progress: 100,
+      unlocked: true,
+      color: "bg-indigo-500"
+    },
   ];
 
   return (
@@ -322,6 +390,96 @@ const Index = () => {
                 <Icon name="List" className="mr-2" size={20} />
                 Посмотреть полный рейтинг
               </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-b from-background to-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 text-lg py-2 px-4" variant="secondary">
+              <Icon name="Award" className="mr-2" size={18} />
+              Награды
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Достижения</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Собирай награды, выполняй испытания и становись легендой
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {achievements.map((achievement, index) => (
+                <Card 
+                  key={index} 
+                  className={`relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+                    achievement.unlocked ? 'border-2 border-primary/30' : 'opacity-70'
+                  }`}
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between mb-3">
+                      <div 
+                        className={`w-14 h-14 ${achievement.unlocked ? achievement.color : 'bg-muted'} rounded-full flex items-center justify-center transition-transform hover:scale-110`}
+                      >
+                        <Icon 
+                          name={achievement.icon} 
+                          className={achievement.unlocked ? 'text-white' : 'text-muted-foreground'} 
+                          size={24} 
+                        />
+                      </div>
+                      {achievement.unlocked && (
+                        <Badge className="bg-primary text-white">
+                          <Icon name="Check" size={14} />
+                        </Badge>
+                      )}
+                    </div>
+                    <CardTitle className="text-lg">{achievement.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <CardDescription className="text-sm min-h-[40px]">
+                      {achievement.description}
+                    </CardDescription>
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-muted-foreground">Прогресс</span>
+                        <span className={`font-semibold ${achievement.unlocked ? 'text-primary' : 'text-muted-foreground'}`}>
+                          {achievement.progress}%
+                        </span>
+                      </div>
+                      <Progress 
+                        value={achievement.progress} 
+                        className="h-2"
+                      />
+                    </div>
+                  </CardContent>
+                  {achievement.unlocked && (
+                    <div className="absolute top-0 right-0 w-24 h-24 -mr-8 -mt-8 bg-primary/10 rounded-full" />
+                  )}
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <Card className="max-w-2xl mx-auto border-2 border-primary/20">
+                <CardContent className="pt-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
+                        <Icon name="TrendingUp" className="text-white" size={28} />
+                      </div>
+                      <div className="text-left">
+                        <h3 className="text-xl font-bold">Твой прогресс</h3>
+                        <p className="text-muted-foreground">3 из 8 достижений разблокировано</p>
+                      </div>
+                    </div>
+                    <div className="text-center sm:text-right">
+                      <div className="text-3xl font-bold text-primary">37%</div>
+                      <p className="text-sm text-muted-foreground">общий прогресс</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
