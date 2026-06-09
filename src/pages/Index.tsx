@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +7,8 @@ import { Progress } from "@/components/ui/progress";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
+  const [gameOpen, setGameOpen] = useState(false);
+
   const scrollToRules = () => {
     document.getElementById('rules')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -151,7 +154,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-6 shadow-xl hover:scale-105 transition-transform"
-              onClick={() => window.open('https://s3.eponesh.com/games/14133/v79/', '_blank')}
+              onClick={() => setGameOpen(true)}
             >
               <Icon name="Play" className="mr-2" size={24} />
               Начать игру
@@ -502,7 +505,7 @@ const Index = () => {
           <Button 
             size="lg" 
             className="bg-accent hover:bg-accent/90 text-white text-xl px-10 py-7 shadow-2xl hover:scale-110 transition-transform"
-            onClick={() => window.open('https://s3.eponesh.com/games/14133/v79/', '_blank')}
+            onClick={() => setGameOpen(true)}
           >
             <Icon name="Gamepad2" className="mr-2" size={28} />
             Начать рыбалку
@@ -517,6 +520,28 @@ const Index = () => {
           </p>
         </div>
       </footer>
+
+      {gameOpen && (
+        <div className="fixed inset-0 z-50 bg-black flex flex-col">
+          <div className="flex items-center justify-between px-4 py-2 bg-black/80">
+            <span className="text-white font-semibold">Реалистичная Рыбалка</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-white hover:bg-white/20"
+              onClick={() => setGameOpen(false)}
+            >
+              <Icon name="X" size={20} className="mr-1" />
+              Закрыть
+            </Button>
+          </div>
+          <iframe
+            src="https://s3.eponesh.com/games/14133/v79/"
+            className="flex-1 w-full border-0"
+            allowFullScreen
+          />
+        </div>
+      )}
     </div>
   );
 };
