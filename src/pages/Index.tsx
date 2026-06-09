@@ -145,7 +145,7 @@ const Index = () => {
       >
         <div className="text-center z-10 px-4 max-w-4xl mx-auto animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg">
-            Реалистичная Рыбалка
+            Рыбный дождь 2
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8 drop-shadow-md">
             Погрузись в атмосферу настоящей рыбалки. Выбирай снасти, исследуй водоёмы, лови трофейную рыбу.
@@ -516,7 +516,7 @@ const Index = () => {
       <footer className="bg-foreground text-background py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm opacity-80">
-            © 2024 Реалистичная Рыбалка. Все права защищены.
+            © 2024 Рыбный дождь 2. Все права защищены.
           </p>
         </div>
       </footer>
@@ -524,7 +524,7 @@ const Index = () => {
       {gameOpen && (
         <div className="fixed inset-0 z-50 bg-black flex flex-col">
           <div className="flex items-center justify-between px-4 py-2 bg-black/80">
-            <span className="text-white font-semibold">Реалистичная Рыбалка</span>
+            <span className="text-white font-semibold">Рыбный дождь 2</span>
             <Button
               variant="ghost"
               size="sm"
