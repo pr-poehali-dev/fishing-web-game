@@ -151,6 +151,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-6 shadow-xl hover:scale-105 transition-transform"
+              onClick={() => window.open('https://s3.eponesh.com/games/14133/v79/', '_blank')}
             >
               <Icon name="Play" className="mr-2" size={24} />
               Начать игру
@@ -501,6 +502,7 @@ const Index = () => {
           <Button 
             size="lg" 
             className="bg-accent hover:bg-accent/90 text-white text-xl px-10 py-7 shadow-2xl hover:scale-110 transition-transform"
+            onClick={() => window.open('https://s3.eponesh.com/games/14133/v79/', '_blank')}
           >
             <Icon name="Gamepad2" className="mr-2" size={28} />
             Начать рыбалку
